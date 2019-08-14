@@ -1,6 +1,6 @@
 package com.fajarazay.github.belajarroom.database;
 
-import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -29,5 +29,9 @@ public interface NoteDao {
     void delete(Note note);
 
     @Query("SELECT * from note ORDER BY id ASC")
-    LiveData<List<Note>> getAllNotes();
+    DataSource.Factory<Integer, Note> getAllNotes();
+
+    //Untuk menambahkan data dummy, tambahkan kode untuk insertAll ke dalam kelas NoteDao
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertAll(List<Note> list);
 }

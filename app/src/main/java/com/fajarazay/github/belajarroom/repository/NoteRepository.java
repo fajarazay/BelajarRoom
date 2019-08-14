@@ -2,13 +2,12 @@ package com.fajarazay.github.belajarroom.repository;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
+import androidx.paging.DataSource;
 
 import com.fajarazay.github.belajarroom.database.Note;
 import com.fajarazay.github.belajarroom.database.NoteDao;
 import com.fajarazay.github.belajarroom.database.NoteRoomDatabase;
 
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,10 +30,9 @@ public class NoteRepository {
         mNotesDao = db.noteDao();
     }
 
-    public LiveData<List<Note>> getAllNotes() {
+    public DataSource.Factory<Integer, Note> getAllNotes() {
         return mNotesDao.getAllNotes();
     }
-
     public void insert(final Note note) {
         executorService.execute(new Runnable() {
             @Override
